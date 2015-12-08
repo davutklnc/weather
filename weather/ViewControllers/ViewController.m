@@ -170,14 +170,18 @@
 -(void)getWeatherDataForCity:(CustomAutoCompleteObject *)obj
 {
     __unused NSURLSessionTask *auth = [OpenWeatherData getcurrentWeatherDataWithCity:obj.cityId data:^(WeatherBaseClass *data, NSError *error) {
-        [self setWeatherDataAndFields:data];
+        if (!error) {
+            [self setWeatherDataAndFields:data];
+        }
     }];
 }
 
 -(void)getForecastDataForCity:(CustomAutoCompleteObject *)obj
 {
     __unused NSURLSessionTask *auth = [OpenWeatherData getForecastDataWithCity:obj.cityId data:^(ForecastBaseClass *data, NSError *error) {
-        [self setForecastDataAndFields:data];
+        if (!error) {
+            [self setForecastDataAndFields:data];
+        }
     }];
 }
 -(void)getForecastDataWithLocation
@@ -189,7 +193,9 @@
             [self getWeatherDataWithLocation:currentCoordinates];
 
             __unused NSURLSessionTask *auth = [OpenWeatherData getForecastDataWithLatitude:currentCoordinates.latitude andLongtitude:currentCoordinates.longitude data:^(ForecastBaseClass *data, NSError *error) {
-                [self setForecastDataAndFields:data];
+                if (!error) {
+                    [self setForecastDataAndFields:data];
+                }
             }];
         }
         else{
@@ -203,7 +209,9 @@
 {
             CLLocationCoordinate2D currentCoordinates = coordinates;
             __unused NSURLSessionTask *auth = [OpenWeatherData getcurrentWeatherDataWithLatitude:currentCoordinates.latitude andLongtitude:currentCoordinates.longitude data:^(WeatherBaseClass *data, NSError *error) {
-                [self setWeatherDataAndFields:data];
+                if (!error) {
+                    [self setWeatherDataAndFields:data];
+                }
             }];
 }
 

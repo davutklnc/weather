@@ -24,8 +24,4 @@
     return _sharedClient;
 }
 
-
-
-
-
 @end
